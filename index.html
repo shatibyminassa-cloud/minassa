@@ -588,7 +588,7 @@
         setupRating('overallRating', 'overallRatingValue', 'overallRatingDisplay');
 
         // معالجة الإرسال
-        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            document.getElementById('surveyForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const formData = new FormData(this);
@@ -598,14 +598,12 @@
             submitBtn.disabled = true;
             submitBtn.textContent = '⏳ جاري الإرسال...';
 
-            // إرسال البيانات إلى Google Apps Script
-            fetch('https://script.google.com/macros/s/AKfycbxo_3A9Zn0HkJQZsE7yof_9Q7513YcRTIlAK7c_Rwit3fihqYGoBHg5npXsH4T9dLI/exec', {                method: 'POST',
+            fetch('https://script.google.com/macros/s/AKfycby3tSPgDikAMq77ueMq5CLPyugbB-X6r_ov2SUkhP2m2XAB-oaHQyVV2t4VpRLx72o/exec', {
+                method: 'POST',
+                mode: 'no-cors',
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
-            .then(result => {
-                console.log('تم الإرسال بنجاح:', result);
-
+            .then(() => {
                 const successMsg = document.getElementById('successMessage');
                 successMsg.style.display = 'block';
                 successMsg.textContent = '✅ شكراً لك! تم استقبال تقييمك بنجاح وحفظه';
